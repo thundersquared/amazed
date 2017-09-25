@@ -40,8 +40,14 @@ const processProduct = async window => {
 }
 
 module.exports = handleErrors(async (req, res) => {
+  let url
+  let response
+
   // Remove initial slash
-  let url = req.url.substr(1).trim()
+  if (process.env.BASE_URL)
+    url = req.url.replace(process.env.BASE_URL, '').trim()
+  else
+    url = req.url.substr(1).trim()
 
   // Load URL
   let { window } = await JSDOM.fromURL(url)
