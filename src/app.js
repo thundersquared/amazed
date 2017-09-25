@@ -52,8 +52,6 @@ module.exports = handleErrors(async (req, res) => {
   // Load URL
   let { window } = await JSDOM.fromURL(url)
 
-  let response
-
   // Check if is Amazon Product Page
   if (regex.test(window.location.href)) {
     response = await processProduct(window)
